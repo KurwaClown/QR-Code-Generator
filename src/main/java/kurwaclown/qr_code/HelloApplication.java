@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(App_Config.class);
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(App_Config.class);
 
         launch();
     }
