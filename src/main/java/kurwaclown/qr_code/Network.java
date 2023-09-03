@@ -2,7 +2,6 @@ package kurwaclown.qr_code;
 
 public abstract class Network {
 
-    protected static Network instance;
     private String password;
     private String SSID;
 

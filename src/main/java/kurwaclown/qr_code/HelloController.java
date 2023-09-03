@@ -5,9 +5,20 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import java.io.File;
 
+@Component
 public class HelloController {
+
+    private Network network;
+
+    @Autowired
+    public void setNetwork(WindowsNetwork defaultWindowsNetwork){
+        this.network = defaultWindowsNetwork;
+    }
 
     @FXML
     private ImageView qrCode_iv;
@@ -32,7 +43,7 @@ public class HelloController {
 
     @FXML
     protected void OnCurrentConnectionButtonClicked(){
-        String fieldText = WindowsNetwork.getInstance().findSSID();
+        String fieldText = network.findSSID();
         connection_tf.setText(fieldText);
     }
 }

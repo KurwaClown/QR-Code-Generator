@@ -25,6 +25,7 @@ public class Generator {
     }
 
     public static void generateWifiQR(Network network){
+        if(network.getPassword() == null) throw new NullPointerException("Password must be set");
         String wifiData = String.format("WIFI:S:%s;T:WPA;P:%s;", network.getSSID(), network.getPassword());
         generate(wifiData);
     }

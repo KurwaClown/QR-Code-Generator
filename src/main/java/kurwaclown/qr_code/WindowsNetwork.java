@@ -3,14 +3,13 @@ package kurwaclown.qr_code;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import org.springframework.stereotype.Service;
 
-@Service
+import org.springframework.stereotype.Component;
+
+@Component
 public class WindowsNetwork extends Network{
 
-
     public WindowsNetwork(){
-
     }
     public WindowsNetwork(String password){
         super(password);
@@ -19,10 +18,6 @@ public class WindowsNetwork extends Network{
         super(ssid, password);
     }
 
-    public static Network getInstance(){
-        if(instance == null) instance = new WindowsNetwork();
-        return instance;
-    }
     @Override
     public String findSSID(){
         try{
