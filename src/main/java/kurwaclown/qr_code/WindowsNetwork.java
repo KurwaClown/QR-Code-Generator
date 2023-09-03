@@ -3,7 +3,9 @@ package kurwaclown.qr_code;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WindowsNetwork extends Network{
 
 
