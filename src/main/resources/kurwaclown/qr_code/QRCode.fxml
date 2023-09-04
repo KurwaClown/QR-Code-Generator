@@ -31,28 +31,38 @@
         <padding>
             <Insets bottom="17.0" left="17.0" right="17.0" top="17.0"/>
         </padding>
-        <Label alignment="CENTER" text="Connection Name :">
+        <Label alignment="CENTER" text="File name :">
             <padding>
                 <Insets right="10.0"/>
             </padding>
         </Label>
-        <Label text="Password :" GridPane.rowIndex="1">
-            <padding>
-                <Insets right="10.0"/>
-            </padding>
-        </Label>
-        <PasswordField fx:id="password_tf" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TextField fx:id="filename_tf" GridPane.columnIndex="1">
             <GridPane.margin>
                 <Insets topRightBottomLeft="10"/>
             </GridPane.margin>
-        </PasswordField>
-        <TextField fx:id="connection_tf" GridPane.columnIndex="1">
+        </TextField>
+        <Label alignment="CENTER" text="Connection Name :" GridPane.rowIndex="1">
+            <padding>
+                <Insets right="10.0"/>
+            </padding>
+        </Label>
+        <TextField fx:id="connection_tf" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <GridPane.margin>
                 <Insets topRightBottomLeft="10"/>
             </GridPane.margin>
         </TextField>
         <Button fx:id="connection_btn" alignment="CENTER" mnemonicParsing="false" text="Current Connection"
-                GridPane.columnIndex="2" onAction="#OnCurrentConnectionButtonClicked"/>
+                GridPane.columnIndex="2" GridPane.rowIndex="1" onAction="#OnCurrentConnectionButtonClicked"/>
+        <Label text="Password :" GridPane.rowIndex="2">
+            <padding>
+                <Insets right="10.0"/>
+            </padding>
+        </Label>
+        <PasswordField fx:id="password_tf" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <GridPane.margin>
+                <Insets topRightBottomLeft="10"/>
+            </GridPane.margin>
+        </PasswordField>
     </GridPane>
     <ImageView fx:id="qrCode_iv" fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true"/>
     <Button fx:id="generate_btn" mnemonicParsing="false" text="Generate" onAction="#onGenerateButtonClicked">

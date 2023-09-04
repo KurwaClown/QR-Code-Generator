@@ -1,6 +1,7 @@
 package kurwaclown.qr_code;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 
@@ -34,13 +35,17 @@ public class HelloController {
     private TextField connection_tf;
 
     @FXML
-    private TextField password_tf;
+    private PasswordField password_tf;
+
+    @FXML
+    private TextField filename_tf;
 
     @FXML
     protected void onGenerateButtonClicked() {
 
         if(password_tf.getCharacters().isEmpty()) return;
-        File qrCodeFile = new File("GeneratedQR.png");
+        if(!filename_tf.getCharacters().isEmpty()) Generator.setFilename(filename_tf.getCharacters().toString());
+        File qrCodeFile = new File(Generator.getFilename() + ".png");
         Generator.generateWifiQR(getNetwork());
         Image image = new Image(qrCodeFile.toURI().toString());
         qrCode_iv.setImage(image);

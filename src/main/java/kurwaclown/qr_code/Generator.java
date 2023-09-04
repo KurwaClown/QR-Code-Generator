@@ -22,6 +22,10 @@ public class Generator {
         Generator.filename = filename;
     }
 
+    public static String getFilename() {
+        return filename;
+    }
+
     private static String formatWifiString(String ssid, String password){
         return String.format("WIFI:S:%s;T:WPA;P:%s;", ssid, password);
     }
