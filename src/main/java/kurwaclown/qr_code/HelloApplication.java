@@ -10,9 +10,14 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import java.io.IOException;
 
 public class HelloApplication extends Application {
+
+    private static AnnotationConfigApplicationContext context;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("QRCode.fxml"));
+        HelloController controller = context.getBean(HelloController.class);
+        fxmlLoader.setController(controller);
+
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -20,8 +25,7 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(App_Config.class);
-
+        context = new AnnotationConfigApplicationContext(App_Config.class);
         launch();
     }
 }

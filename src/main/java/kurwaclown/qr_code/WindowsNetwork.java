@@ -11,12 +11,7 @@ public class WindowsNetwork extends Network{
 
     public WindowsNetwork(){
     }
-    public WindowsNetwork(String password){
-        super(password);
-    }
-    public WindowsNetwork(String ssid, String password) {
-        super(ssid, password);
-    }
+
 
     @Override
     public String findSSID(){

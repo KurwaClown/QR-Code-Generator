@@ -9,14 +9,7 @@ public abstract class Network {
         this.SSID = findSSID();
         password = "";
     }
-    public Network(String password){
-        this.SSID = findSSID();
-        this.password = password;
-    }
-    public Network(String ssid, String password){
-        this.SSID = ssid;
-        this.password = password;
-    }
+
 
     public String getPassword(){
         return password;
