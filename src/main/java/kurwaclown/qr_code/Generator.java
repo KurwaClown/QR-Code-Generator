@@ -16,37 +16,35 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 public class Generator {
     private static final int DEFAULT_LENGTH = 250;
 
+    private static String filename = "GeneratedQR";
+
+    public static void setFilename(String filename) {
+        Generator.filename = filename;
+    }
+
     private static String formatWifiString(String ssid, String password){
         return String.format("WIFI:S:%s;T:WPA;P:%s;", ssid, password);
     }
+
+    public static void generateWifiQR(Network network){
+        if(network.getPassword() == null) throw new NullPointerException("Password must be set");
+        generateWifiQR(network.getSSID(), network.getPassword());
+    }
+
     public static void generateWifiQR(String ssid, String password){
         String wifiData = formatWifiString(ssid, password);
         generate(wifiData);
     }
 
-    public static void generateWifiQR(Network network){
-        if(network.getPassword() == null) throw new NullPointerException("Password must be set");
-        String wifiData = String.format("WIFI:S:%s;T:WPA;P:%s;", network.getSSID(), network.getPassword());
-        generate(wifiData);
-    }
     public static void generate(String data){
         generate(data, DEFAULT_LENGTH);
     }
 
-    public static void generate(String data, String filename){
-        generate(data, DEFAULT_LENGTH, filename);
-    }
     public static void generate (String data, int sideLength){
         generate(data, sideLength, sideLength);
     }
 
-    public static void generate(String data, int sideLength, String filename){
-        generate(data, sideLength, sideLength, filename);
-    }
-    public static void generate(String data, int width, int height){
-        generate(data, width, height, "GeneratedQR.png");
-    }
-    public static void generate(String data, int width, int height, String filename) {
+    public static void generate(String data, int width, int height) {
 
         if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException("Width and height must be greater than zero.");
@@ -59,7 +57,7 @@ public class Generator {
         try {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, width, height, hints);
 
-            Path qrCodeFile = new File(filename).toPath();
+            Path qrCodeFile = new File(filename + ".png").toPath();
             MatrixToImageWriter.writeToPath(
                     bitMatrix,
                     "png",
