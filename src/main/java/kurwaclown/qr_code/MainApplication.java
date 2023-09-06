@@ -14,7 +14,7 @@ public class MainApplication extends Application {
     private static AnnotationConfigApplicationContext context;
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("QRCode_Upgraded.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MainApplication.class.getResource("QRCode.fxml"));
         MainController controller = context.getBean(MainController.class);
         fxmlLoader.setController(controller);
 
