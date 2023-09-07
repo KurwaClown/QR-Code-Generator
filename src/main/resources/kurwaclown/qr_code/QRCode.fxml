@@ -1,46 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="300.0">
       <padding>
-         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
       </padding>
-      <ComboBox fx:id="informationType_cbb" prefWidth="150.0" promptText="Information type" visibleRowCount="2"
-                onAction="#onInformationTypeChanged">
+      <ComboBox fx:id="informationType_cbb" onAction="#onInformationTypeChanged" prefWidth="150.0" promptText="Information type" visibleRowCount="2">
          <items>
          <FXCollections fx:factory="observableArrayList">
-            <String fx:id="type_str" fx:value="Simple string"/>
-            <String fx:id="type_wifi" fx:value="Wi-fi Connection"/>
+            <String fx:id="type_str" fx:value="Simple string" />
+            <String fx:id="type_wifi" fx:value="Wi-fi Connection" />
          </FXCollections>
       </items>
       </ComboBox>
       <Separator prefWidth="200.0">
          <VBox.margin>
-            <Insets bottom="10.0" top="20.0"/>
+            <Insets bottom="10.0" top="20.0" />
          </VBox.margin>
       </Separator>
-      <Pane fx:id="fields_pane" layoutX="35.0" layoutY="91.0" VBox.vgrow="ALWAYS"/>
+      <Pane fx:id="fields_pane" layoutX="35.0" layoutY="91.0" VBox.vgrow="ALWAYS" />
+      <Separator prefWidth="200.0" />
+      <VBox prefWidth="100.0">
+         <padding>
+            <Insets right="100.0" />
+         </padding>
+         <CheckBox fx:id="filename_cb" alignment="CENTER" mnemonicParsing="false" onAction="#onFilenameCheckboxClicked" text="Use custom file name">
+            <VBox.margin>
+               <Insets bottom="5.0" top="5.0" />
+            </VBox.margin>
+         </CheckBox>
+         <TextField fx:id="filename_tf" disable="true">
+            <VBox.margin>
+               <Insets bottom="10.0" />
+            </VBox.margin>
+         </TextField>
+      </VBox>
+      <Separator prefWidth="200.0" />
       <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#onGenerateButtonClicked" text="Generate">
          <VBox.margin>
-            <Insets top="10.0"/>
+            <Insets top="10.0" />
          </VBox.margin>
       </Button>
    </VBox>
+   <Separator orientation="VERTICAL">
+      <HBox.margin>
+         <Insets bottom="20.0" top="20.0" />
+      </HBox.margin>
+   </Separator>
    <ImageView fx:id="qrCode_iv" fitHeight="350.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true">
       <HBox.margin>
-         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+         <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
       </HBox.margin>
    </ImageView>
 </HBox>
