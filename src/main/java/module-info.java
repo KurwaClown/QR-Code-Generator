@@ -11,4 +11,8 @@ module kurwaclown.qr_code {
 
     opens kurwaclown.qr_code to javafx.fxml, spring.core;
     exports kurwaclown.qr_code;
+    exports kurwaclown.qr_code.module;
+    exports kurwaclown.qr_code.controllers;
+    opens kurwaclown.qr_code.module to javafx.fxml, spring.core;
+    opens kurwaclown.qr_code.controllers to javafx.fxml;
 }
