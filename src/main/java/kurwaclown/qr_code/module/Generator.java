@@ -4,6 +4,7 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.common.BitMatrix;
 
 import java.io.File;
@@ -62,15 +63,21 @@ public class Generator {
         Map<EncodeHintType, Object> hints = new HashMap<>();
 
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        hints.put(EncodeHintType.MARGIN, 0);
 
         try {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(data, BarcodeFormat.QR_CODE, width, height, hints);
 
-            Path qrCodeFile = new File(filename + ".png").toPath();
+            Path qrCodePath = new File(filename + ".png").toPath();
+
+            int onColor = 0xFF000000; // Black
+            int offColor = 0x00000000; // Transparent
             MatrixToImageWriter.writeToPath(
                     bitMatrix,
                     "png",
-                    qrCodeFile);
+                    qrCodePath,
+                    new MatrixToImageConfig(onColor,offColor));
+
         } catch (WriterException | IOException e){
             e.printStackTrace();
         };
