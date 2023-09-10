@@ -70,6 +70,7 @@ public class Generator {
 
             Path qrCodePath = new File(filename + ".png").toPath();
 
+            //TODO : QR Color Selection
             int onColor = 0xFF000000; // Black
             int offColor = 0x00000000; // Transparent
             MatrixToImageWriter.writeToPath(
