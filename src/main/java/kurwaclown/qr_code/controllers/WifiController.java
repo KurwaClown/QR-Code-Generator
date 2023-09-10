@@ -36,7 +36,11 @@ public class WifiController implements  FieldsController{
     private PasswordField password_tf;
     @Override
     public void generate() {
-        if (validateFields()) Generator.generateWifiQR(getNetwork());
+
+        if (validateFields()) {
+            network.setPassword(password_tf.getCharacters().toString());
+            Generator.generateWifiQR(getNetwork());
+        };
     }
 
     private Boolean validateFields() {
