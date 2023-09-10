@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-public class Contact_Informations {
+public class Contact {
 
     public enum Information_Type{
         FULLNAME, PHONE, MAIL, URL, ADDRESS, BIRTHDAY, TITLE;
@@ -19,10 +19,10 @@ public class Contact_Informations {
     private String birthday;
     private String title;
 
-    public Contact_Informations(){
+    public Contact(){
 
     }
-    public Contact_Informations(Map<Information_Type, String> informations){
+    public Contact(Map<Information_Type, String> informations){
         if(informations.isEmpty()) throw new IllegalArgumentException("Constructor need at least one information inside the map");
 
         for (Map.Entry<Information_Type, String> information :

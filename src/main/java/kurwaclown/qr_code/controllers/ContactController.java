@@ -2,7 +2,7 @@ package kurwaclown.qr_code.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import kurwaclown.qr_code.module.Contact_Informations;
+import kurwaclown.qr_code.module.Contact;
 import kurwaclown.qr_code.module.Generator;
 
 import java.util.HashMap;
@@ -36,14 +36,14 @@ public class ContactController implements FieldsController{
 
     @Override
     public void generate() {
-        Map<Contact_Informations.Information_Type, String> informations = new HashMap<>();
-        informations.put(Contact_Informations.Information_Type.FULLNAME, fullname_tf.getCharacters().toString());
-        informations.put(Contact_Informations.Information_Type.PHONE, phone_tf.getCharacters().toString());
-        informations.put(Contact_Informations.Information_Type.MAIL, mail_tf.getCharacters().toString());
-        informations.put(Contact_Informations.Information_Type.URL, url_tf.getCharacters().toString());
-        informations.put(Contact_Informations.Information_Type.ADDRESS, buildAddressString());
+        Map<Contact.Information_Type, String> informations = new HashMap<>();
+        informations.put(Contact.Information_Type.FULLNAME, fullname_tf.getCharacters().toString());
+        informations.put(Contact.Information_Type.PHONE, phone_tf.getCharacters().toString());
+        informations.put(Contact.Information_Type.MAIL, mail_tf.getCharacters().toString());
+        informations.put(Contact.Information_Type.URL, url_tf.getCharacters().toString());
+        informations.put(Contact.Information_Type.ADDRESS, buildAddressString());
 
-        Contact_Informations contactInformations = new Contact_Informations(informations);
+        Contact contactInformations = new Contact(informations);
 
         if (validateFields(contactInformations))Generator.generateContactQr(contactInformations);
     }
@@ -59,7 +59,7 @@ public class ContactController implements FieldsController{
     }
 
 
-    private Boolean validateFields(Contact_Informations contactInformations) {
+    private Boolean validateFields(Contact contactInformations) {
         return contactInformations.ensureOneInformation();
     }
 }

@@ -31,7 +31,7 @@ public class Generator {
         return String.format("WIFI:S:%s;T:WPA;P:%s;", ssid, password);
     }
 
-    public static void generateContactQr(Contact_Informations contactInformations){
+    public static void generateContactQr(Contact contactInformations){
         generate(contactInformations.getInformationsAsString());
     }
 
