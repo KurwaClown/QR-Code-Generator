@@ -3,7 +3,6 @@ package kurwaclown.qr_code;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -20,24 +19,11 @@ public class MainApplication extends Application {
 
         Scene scene = new Scene(fxmlLoader.load());
 
-        setDefaultViewDetails(controller);
-
+        controller.setFilenameFieldContent();
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
     }
-
-    private void setDefaultViewDetails(MainController controller) throws IOException{
-        FXMLLoader fields = new FXMLLoader(MainApplication.class.getResource("WIFI_Fields.fxml"));
-        fields.setController(controller);
-
-        GridPane fields_loaded = fields.load();
-        controller.modifyInformationFields(fields_loaded);
-
-        controller.setFilenameFieldContent();
-    }
-
-
 
     public static void main(String[] args) {
         context = new AnnotationConfigApplicationContext(App_Config.class);
