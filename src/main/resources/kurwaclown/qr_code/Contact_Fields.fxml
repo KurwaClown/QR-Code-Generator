@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="170.0" prefWidth="240.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets topRightBottomLeft="5"/>
+   </padding>
+   <VBox>
+      <Label text="Full Name"/>
+      <TextField fx:id="fullname_tf"/>
+      <Label text="Phone"/>
+      <TextField fx:id="phone_tf"/>
+      <Label text="E-Mail"/>
+      <TextField fx:id="mail_tf"/>
+      <Label text="URL"/>
+      <TextField fx:id="url_tf"/>
+      <Label text="Address"/>
+      <TextField fx:id="address_tf"/>
+      <Label text="City"/>
+      <TextField fx:id="city_tf"/>
+      <Label text="Postal Code"/>
+      <TextField fx:id="postalCode_tf"/>
+      <Label text="Birthday"/>
+      <DatePicker fx:id="birthday_dp"/>
+      <Label text="Title"/>
+      <TextField fx:id="title_tf"/>
+   </VBox>
+</ScrollPane>

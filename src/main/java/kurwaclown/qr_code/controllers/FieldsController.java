@@ -7,5 +7,5 @@ public interface FieldsController
 {
     void generate();
 
-    Boolean validateFields();
+    private Boolean validateFields(){return false;}
 }

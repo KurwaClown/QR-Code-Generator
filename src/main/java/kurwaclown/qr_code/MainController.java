@@ -3,37 +3,36 @@ package kurwaclown.qr_code;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import kurwaclown.qr_code.controllers.*;
+import kurwaclown.qr_code.module.Generator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 @Component
 @Scope("singleton")
 public class MainController {
 
-    private Network network;
+    private record ViewInformations(String dataType, String viewName, FieldsController controller){};
 
+    private final List<ViewInformations> viewsInformations;
     @Autowired
-    public void setNetwork(WindowsNetwork defaultWindowsNetwork){
-        this.network = defaultWindowsNetwork;
-        System.out.println("Setting network " + this.network);
-    }
-
-    public Network getNetwork() {
-        return network;
+    public MainController(DataController dataController, WifiController wifiController, ContactController contactController) {
+        this.viewsInformations = List.of(
+                new ViewInformations("Simple string", "DataString_Fields.fxml", dataController),
+                new ViewInformations("Wi-fi Connection", "WIFI_Fields.fxml", wifiController),
+                new ViewInformations("Contact Informations", "Contact_Fields.fxml", contactController)
+        );
     }
 
     @FXML
@@ -41,12 +40,6 @@ public class MainController {
 
     @FXML
     private ComboBox<String> informationType_cbb;
-
-    @FXML
-    private TextField connection_tf;
-
-    @FXML
-    private PasswordField password_tf;
 
     @FXML
     private TextField filename_tf;
@@ -61,34 +54,24 @@ public class MainController {
     private Pane fields_pane;
 
     @FXML
-    private TextField data_tf;
-
-    private final Map<String, String> sceneMap = Map.ofEntries(Map.entry("Simple string", "DataString_Fields.fxml"),
-            Map.entry("Wi-fi Connection", "WIFI_Fields.fxml"));
-
-    @FXML
     protected void onGenerateButtonClicked() {
-        String qrType = informationType_cbb.getValue();
+        filenameChangeCheck();
 
-        if(qrType.equals("Simple string")) generateDataQRCode();
-        else generateWifiQRCode();
+        generateDataQRCode();
 
         modifyImageViewContent();
     }
 
     @FXML
-    protected void OnCurrentConnectionButtonClicked(){
-        String fieldText = getNetwork().findSSID();
-        connection_tf.setText(fieldText);
-    }
-
-    @FXML
     protected void onInformationTypeChanged() throws IOException{
-        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(sceneMap.get(informationType_cbb.getValue())));
-        loader.setController(this);
-        this.fields_pane.getChildren().remove(0);
+
+        ViewInformations currentViewInformations = getCurrentViewInformations();
+
+        FXMLLoader loader = new FXMLLoader(MainApplication.class.getResource(currentViewInformations.viewName));
+        loader.setController(currentViewInformations.controller);
+
+        if (!fields_pane.getChildren().isEmpty()) this.fields_pane.getChildren().remove(0);
         this.fields_pane.getChildren().add(loader.load());
-        setFilenameFieldContent();
     }
 
     @FXML
@@ -98,19 +81,20 @@ public class MainController {
 
 
     private void generateDataQRCode() {
-        if(data_tf.getCharacters().isEmpty()) return;
-        filenameChangeCheck();
-
-        Generator.generate(data_tf.getCharacters().toString());
+        getCurrentViewInformations().controller.generate();
     }
 
-    private void generateWifiQRCode() {
-        if(password_tf.getCharacters().isEmpty()) return;
-        filenameChangeCheck();
+    private ViewInformations getCurrentViewInformations(){
+        ViewInformations foundView = viewsInformations.stream()
+                .filter(info -> info.dataType.equals(informationType_cbb.getValue()))
+                .findFirst()
+                .orElse(null);
+        if (foundView == null) {
+            throw new IllegalStateException("An unknown data type was searched");
+        }
 
-        Generator.generateWifiQR(getNetwork());
+        return foundView;
     }
-
     private void filenameChangeCheck(){
         if(!filename_cb.isSelected()) return;
 
@@ -124,10 +108,6 @@ public class MainController {
         File qrCodeFile = new File(Generator.getFilename() + ".png");
         Image image = new Image(qrCodeFile.toURI().toString());
         qrCode_iv.setImage(image);
-    }
-
-    public void modifyInformationFields(Node node){
-        fields_pane.getChildren().add(node);
     }
 
     public void setFilenameFieldContent() {

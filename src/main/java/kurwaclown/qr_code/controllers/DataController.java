@@ -8,11 +8,12 @@ public class DataController implements FieldsController{
 
     @FXML
     private TextField data_tf;
+
     public void generate() {
         if(validateFields()) Generator.generate(data_tf.getCharacters().toString());
     }
 
-    public Boolean validateFields() {
+    private Boolean validateFields() {
         return !data_tf.getCharacters().isEmpty();
     }
 }
