@@ -1,4 +1,4 @@
-package kurwaclown.qr_code;
+package kurwaclown.qr_code.module;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
+import kurwaclown.qr_code.Network;
 
 public class Generator {
     private static final int DEFAULT_LENGTH = 250;
@@ -28,6 +29,10 @@ public class Generator {
 
     private static String formatWifiString(String ssid, String password){
         return String.format("WIFI:S:%s;T:WPA;P:%s;", ssid, password);
+    }
+
+    public static void generateContactQr(Contact_Informations contactInformations){
+        generate(contactInformations.getInformationsAsString());
     }
 
     public static void generateWifiQR(Network network){
