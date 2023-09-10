@@ -12,11 +12,12 @@
       <padding>
          <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
       </padding>
-      <ComboBox fx:id="informationType_cbb" onAction="#onInformationTypeChanged" prefWidth="150.0" promptText="Information type" visibleRowCount="2">
+      <ComboBox fx:id="informationType_cbb" onAction="#onInformationTypeChanged" promptText="Information type">
          <items>
          <FXCollections fx:factory="observableArrayList">
             <String fx:id="type_str" fx:value="Simple string" />
             <String fx:id="type_wifi" fx:value="Wi-fi Connection" />
+            <String fx:id="type_contact" fx:value="Contact Informations" />
          </FXCollections>
       </items>
       </ComboBox>
@@ -26,14 +27,17 @@
          </VBox.margin>
       </Separator>
       <Pane fx:id="fields_pane" layoutX="35.0" layoutY="91.0" VBox.vgrow="ALWAYS" />
-      <Separator prefWidth="200.0" />
+      <Separator prefWidth="200.0">
+         <VBox.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </VBox.margin></Separator>
       <VBox prefWidth="100.0">
          <padding>
             <Insets right="100.0" />
          </padding>
          <CheckBox fx:id="filename_cb" alignment="CENTER" mnemonicParsing="false" onAction="#onFilenameCheckboxClicked" text="Use custom file name">
             <VBox.margin>
-               <Insets bottom="5.0" top="5.0" />
+               <Insets bottom="5.0" />
             </VBox.margin>
          </CheckBox>
          <TextField fx:id="filename_tf" disable="true">

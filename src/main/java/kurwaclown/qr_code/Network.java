@@ -26,7 +26,7 @@ public abstract class Network {
         this.SSID = newSSID;
     }
 
-    abstract String findSSID();
+    public abstract String findSSID();
 
 
 }
